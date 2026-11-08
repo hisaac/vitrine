@@ -1,4 +1,44 @@
+[settings]
+activate_aggressive = true
+experimental = true
+minimum_release_age = "0s"
+
 [tools]
 node = "latest"
 pnpm = "latest"
 rust = "latest"
+
+[tasks.bootstrap]
+description = "Install toolchains and development dependencies"
+run = [
+  "mise install",
+  "pnpm install --frozen-lockfile",
+  "cargo fetch --locked --manifest-path src-tauri/Cargo.toml",
+  "cargo install cargo-edit --locked",
+]
+
+[tasks.build]
+description = "Build and bundle the desktop app"
+run = "pnpm tauri build"
+
+[tasks.run]
+description = "Run the desktop app in development mode"
+alias = "vitrine"
+run = "pnpm tauri dev"
+
+[tasks.upd]
+description = "Update tools and dependencies within declared version ranges"
+run = [
+  "mise upgrade",
+  "pnpm update",
+  "cargo update --manifest-path src-tauri/Cargo.toml",
+]
+
+[tasks.upg]
+description = "Upgrade tools and dependencies, including major versions"
+run = [
+  "mise upgrade --bump",
+  "pnpm update --latest",
+  "cargo upgrade --incompatible --manifest-path src-tauri/Cargo.toml",
+  "cargo update --manifest-path src-tauri/Cargo.toml",
+]
