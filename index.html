@@ -2,42 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/src/styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tauri App</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <title>Vitrine</title>
     <script type="module" src="/src/main.ts" defer></script>
   </head>
-
   <body>
-    <main class="container">
-      <h1>Welcome to Tauri</h1>
-
-      <div class="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/src/assets/vite.svg" class="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img
-            src="/src/assets/tauri.svg"
-            class="logo tauri"
-            alt="Tauri logo"
-          />
-        </a>
-        <a href="https://www.typescriptlang.org/docs" target="_blank">
-          <img
-            src="/src/assets/typescript.svg"
-            class="logo typescript"
-            alt="typescript logo"
-          />
-        </a>
+    <main id="frame" aria-label="Art frame">
+      <div id="artwork"></div>
+      <section id="welcome">
+        <div class="frame-mark" aria-hidden="true"></div>
+        <p class="eyebrow">VITRINE</p>
+        <h1>A little space for art.</h1>
+        <p class="intro">Choose a folder of images.<br />Let them take their time.</p>
+        <button id="start" class="primary">Choose a folder</button>
+        <p class="formats">JPEG · PNG · WebP · GIF · AVIF · BMP</p>
+      </section>
+      <p id="message" role="status" aria-live="polite"></p>
+      <div id="chrome">
+        <header>
+          <span class="wordmark">VITRINE</span>
+          <span id="folder-name"></span>
+          <button id="choose">Change folder</button>
+        </header>
+        <footer>
+          <div class="caption"><span id="filename"></span><span id="counter"></span></div>
+          <div class="toolbar" role="group" aria-label="Playback controls">
+            <button id="previous" title="Previous image (Left arrow)" aria-label="Previous image">←</button>
+            <button id="pause" title="Pause or play (Space)">Pause</button>
+            <button id="next" title="Next image (Right arrow)" aria-label="Next image">→</button>
+            <span class="divider" aria-hidden="true"></span>
+            <label>Order <select id="order"><option value="ordered">Filename</option><option value="shuffle">Shuffle</option></select></label>
+            <label>Every <input id="seconds" type="number" min="1" max="3600" step="1" value="30" aria-label="Seconds per image" /> s</label>
+            <button id="fullscreen" title="Toggle fullscreen (F)">Fullscreen</button>
+          </div>
+          <p class="hint">Space to pause · ← → to browse · F for fullscreen · Esc to leave</p>
+        </footer>
       </div>
-      <p>Click on the Tauri logo to learn more about the framework</p>
-
-      <form class="row" id="greet-form">
-        <input id="greet-input" placeholder="Enter a name..." />
-        <button type="submit">Greet</button>
-      </form>
-      <p id="greet-msg"></p>
     </main>
   </body>
 </html>
